@@ -1,0 +1,8 @@
+name: chenshuhua
+sex: female
+habbit:
+  - habbit1: makeup
+  - habbit2: looking
+  - habbit3:
+      - name: uuu
+      - sex: uuu

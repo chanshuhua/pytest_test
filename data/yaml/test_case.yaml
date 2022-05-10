@@ -1,0 +1,23 @@
+---
+tests:
+
+#以下用例不包含文本案例库高级筛选
+#用例1
+- case:
+    description: "文本案例库-查询无分类下待审核会话"
+    level: "level0"
+    author: "chenshuhua"
+    update: "20210923"
+  http:
+    method: POST
+    path: "/gateway/see-dataset/case-session/list-session"
+    params:
+      sessionType: 1
+      state: 1
+      caseTypeId: ""
+      keyword: ""
+      pageNum: 1
+      pageSize: 10
+  expected:
+      code: 0
+      message: "SUCCESS"

@@ -1,0 +1,16 @@
+-
+  name: "用例名称1"
+  descripetion: "用例描述1"
+  request:
+    url: "http://127.0.0.1:8000"
+    method: post
+    data: {"name" : "chenshuhua"}
+  validate: None
+-
+  name: "用例名称2"
+  descripetion: "用例描述2"
+  request:
+    url: "http://127.0.0.1:8000"
+    method: post
+    data: {"name" : "chenshuhua"}
+  validate: None

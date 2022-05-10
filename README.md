@@ -223,23 +223,67 @@ assert
         2、@pytest.mark.parametrize('arg1,arg2',[['a',1],['b',2],['c',3]])
 
 2、yaml文件测试用例读写、封装
-    1、扩展名：yaml、yml
-    2、支持#注释
-    3、通过缩进表示层级关系
-    4、支持区分大小写
-    用途：
-        1、用于配置文件（yaml/ini）。exam：全局环境变量
-        2、编写接口自动化测试用例。
-    
-    数据组成：
-        1、map对象。键值对。key:( )value 
-            1.1、str单值。 value为单值。 key: value  # 注意有空格
-            2.1、list数组值(可层层嵌套)。值可采用list形式输入多个键值对。  fatherkey:
-                                                                        - key: value1
-                                                                        - key: value2 ...
+    2.1 yaml文件详解
+        2.1.1、扩展名：yaml、yml
+        2.1.2、支持#注释
+        2.1.3、通过缩进表示层级关系
+        2.1.4、支持区分大小写
+        2.2、用途：
+            2.2.1、用于配置文件（yaml/ini）。exam：全局环境变量
+            2.2.2、编写接口自动化测试用例。
+        
+        2.3、数据组成：
+            2.3.1、map对象:键值对。key:( )value {}
+                2.3.1.1、str单值。 value为单值。{ key: value }  # 注意有空格
+                2.3.1.2、list数组值(可层层嵌套)。值可采用list形式输入多个键值对。  
+                     fatherkey:
+                         [  - { key: value1 }
+                            - { key: value2 } 
+                            ... 
+                         ]        
+        2.4、yaml样例：
+        -
+          name: "用例名称1"
+          descripetion: "用例描述1"
+          request:
+            url: "localhost:8000"
+            method: post
+            data: {"name" : "chenshuhua"}
+          validate: None 
+        -
+          name: "用例名称2"
+          descripetion: "用例描述2"
+          request:
+            url: "localhost:8000"
+            method: post
+            data: {"name" : "chenshuhua"}
+          validate: None                                                                    
  
+        # 获取结果：
+        # [
+            {
+             "name": "获取登录token信息", 
+             "descripetion": "",
+             "request": {
+                "url": "localhost:8000", 
+                "method": "post", 
+                "data": {"name": "chenshuhua"}
+                }, 
+            "validate": "None"
+            } 
+          ]         
         
-        
-        
+3、paramtrize和yaml的结合使用
+# 通过调用自己封装的read_yaml方法返回的list结果 通过指定名称 传送到被装饰的方法中。
+pytest.mark.parametrize('getToken',read_yaml('data/yaml/get_token.yaml'))
+def get_Token(self,getToken)
+    ...
+# 用例中即可获取getToken的传参值并做赋值调用，调用参数len(list)次数用例执行。
 
-```# pytest_test
+4、封装requests请求
+统一request入口，在公用方法中定义get请求、post请求。
+可配置url鉴别，输入get、post时转换为小写字母鉴别、对接口请求的异常处理、设置默认请求头格式。
+
+5、yaml文件自定义处理
+
+```

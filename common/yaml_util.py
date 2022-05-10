@@ -32,3 +32,4 @@ def read_yaml(yaml_path):
 if __name__ == '__main__':
     print(get_obj_path())
     print(read_yaml('data/yaml/test.yaml'))
+    print(read_yaml('data/yaml/get_token.yaml'))
